@@ -36,11 +36,21 @@ DATABASE_URL="postgresql://user:password@host:port/database"
 NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="your-secret-key-generate-with-openssl"
 
-# Cloudinary (опционально для загрузки изображений)
+# Cloudinary (для загрузки изображений в админке)
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your-cloud-name"
-CLOUDINARY_API_KEY="your-api-key"
-CLOUDINARY_API_SECRET="your-api-secret"
 ```
+
+**⚙️ Настройка Cloudinary:**
+1. Зарегистрируйтесь на https://cloudinary.com (бесплатно)
+2. Перейдите: **Settings** → **Upload** → **Add upload preset**
+3. Создайте preset:
+   - Preset name: `furniture_studio`
+   - Signing Mode: `Unsigned`
+   - Folder: `furniture-studio` (опционально)
+4. Скопируйте **Cloud Name** из Dashboard
+5. Вставьте в `.env` как `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
+
+Теперь в админке можно загружать фото кнопкой **Upload Image**!
 
 ### 4. Инициализируйте базу данных
 ```bash
