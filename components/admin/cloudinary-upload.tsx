@@ -13,17 +13,21 @@ interface CloudinaryUploadProps {
 }
 
 export function CloudinaryUpload({ value, onChange, onRemove }: CloudinaryUploadProps) {
-  const onUpload = (result: any) => {
-    onChange(result.info.secure_url)
-  }
-
   const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "ml_default"
+
+  const handleUpload = (result: any) => {
+    if (result.event === "success") {
+      const url = result.info.secure_url
+      console.log("Uploaded image URL:", url)
+      onChange(url)
+    }
+  }
 
   return (
     <div className="space-y-4">
       <CldUploadWidget
         uploadPreset={uploadPreset}
-        onUpload={onUpload}
+        onSuccess={handleUpload}
       >
         {({ open }) => (
           <Button type="button" variant="outline" onClick={() => open()}>
