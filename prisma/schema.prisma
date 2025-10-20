@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  SUPER_ADMIN
+}
+
+model Product {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  nameRu         String
+  nameEn         String
+  descriptionRu  String   @db.Text
+  descriptionEn  String   @db.Text
+  shortDescRu    String?
+  shortDescEn    String?
+  category       Category
+  materials      String[]
+  dimensions     String?
+  weight         String?
+  price          Float?
+  priceOnRequest Boolean  @default(false)
+  currency       String   @default("USD")
+  images         String[]
+  mainImage      String?
+  videos         String[]
+  model3d        String?
+  published      Boolean  @default(false)
+  featured       Boolean  @default(false)
+  views          Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+enum Category {
+  ROCKING_CHAIRS
+  CHAIRS
+  TABLES
+  SHELVES
+  OTHER
+}
+
+model Portfolio {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  titleRu       String
+  titleEn       String
+  descriptionRu String   @db.Text
+  descriptionEn String   @db.Text
+  clientName    String?
+  location      String?
+  problemRu     String?  @db.Text
+  problemEn     String?  @db.Text
+  solutionRu    String?  @db.Text
+  solutionEn    String?  @db.Text
+  resultRu      String?  @db.Text
+  resultEn      String?  @db.Text
+  images        String[]
+  coverImage    String?
+  videos        String[]
+  category      String?
+  completedAt   DateTime?
+  published     Boolean  @default(false)
+  featured      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  name      String
+  email     String?
+  phone     String
+  company   String?
+  type      OrderType
+  productId String?
+  message   String      @db.Text
+  status    OrderStatus @default(NEW)
+  notes     String?     @db.Text
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+enum OrderType {
+  PRODUCT
+  CONSULTATION
+  CUSTOM
+  DESIGN_ONLY
+}
+
+enum OrderStatus {
+  NEW
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  position  String?
+  company   String?
+  avatar    String?
+  textRu    String   @db.Text
+  textEn    String   @db.Text
+  rating    Int      @default(5)
+  published Boolean  @default(false)
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Settings {
+  id             String   @id @default("singleton")
+  email          String
+  phone          String
+  whatsapp       String?
+  telegram       String?
+  address        String?
+  instagram      String?
+  facebook       String?
+  youtube        String?
+  heroVideoUrl   String?
+  heroTitleRu    String?
+  heroTitleEn    String?
+  heroSubtitleRu String?
+  heroSubtitleEn String?
+  updatedAt      DateTime @updatedAt
+}
+

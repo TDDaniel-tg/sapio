@@ -1,0 +1,117 @@
+{
+  "nav": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "portfolio": "Portfolio",
+    "about": "About",
+    "process": "Process",
+    "contact": "Contact",
+    "orderNow": "Order Now"
+  },
+  "hero": {
+    "title": "Creating Premium Furniture for Your Business",
+    "subtitle": "From 3D design to delivery. Own production. CIS and Europe",
+    "viewCatalog": "View Catalog",
+    "getConsultation": "Get Consultation",
+    "scrollDown": "Scroll Down"
+  },
+  "stats": {
+    "projects": "Projects",
+    "experience": "Years Experience",
+    "clients": "Clients"
+  },
+  "whyUs": {
+    "title": "Why Choose Us",
+    "fullCycle": {
+      "title": "Full Cycle",
+      "description": "From idea to installation in 14 days"
+    },
+    "design": {
+      "title": "Own 3D Design",
+      "description": "See the result before production"
+    },
+    "production": {
+      "title": "Own Production",
+      "description": "Control quality at every stage"
+    },
+    "geography": {
+      "title": "Work in CIS and Europe",
+      "description": "Delivery to any country"
+    }
+  },
+  "categories": {
+    "title": "What We Do",
+    "rockingChairs": "Rocking Chairs",
+    "chairs": "Chairs",
+    "tables": "Tables",
+    "shelves": "Shelves & Racks",
+    "other": "Other Products"
+  },
+  "portfolio": {
+    "title": "Our Projects",
+    "viewAll": "All Projects",
+    "viewCase": "View Case"
+  },
+  "process": {
+    "title": "How We Work",
+    "step1": {
+      "title": "Request",
+      "description": "We respond within 1 hour"
+    },
+    "step2": {
+      "title": "Discussion",
+      "description": "We call and discuss details"
+    },
+    "step3": {
+      "title": "3D Project",
+      "description": "We create visualization (if needed)"
+    },
+    "step4": {
+      "title": "Production",
+      "description": "Manufacturing in 10-14 days"
+    },
+    "step5": {
+      "title": "Delivery",
+      "description": "We deliver and assemble or send parts"
+    }
+  },
+  "testimonials": {
+    "title": "Client Reviews"
+  },
+  "contact": {
+    "title": "Ready to Discuss Your Project?",
+    "form": {
+      "name": "Name",
+      "phone": "Phone",
+      "message": "Message",
+      "submit": "Send"
+    }
+  },
+  "footer": {
+    "description": "Premium furniture for business. Own production, delivery worldwide.",
+    "navigation": "Navigation",
+    "contacts": "Contacts",
+    "social": "Social Media",
+    "rights": "All rights reserved"
+  },
+  "product": {
+    "viewDetails": "View Details",
+    "priceOnRequest": "Price on Request",
+    "order": "Order",
+    "specifications": "Specifications",
+    "materials": "Materials",
+    "dimensions": "Dimensions",
+    "weight": "Weight"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back"
+  }
+}
+
