@@ -10,11 +10,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Switch } from "@/components/ui/switch"
 import { useToast } from "@/components/ui/use-toast"
+import { CloudinaryUpload } from "@/components/admin/cloudinary-upload"
 
 export default function NewProductPage() {
   const router = useRouter()
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
+  const [mainImage, setMainImage] = useState("")
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -35,7 +37,7 @@ export default function NewProductPage() {
       price: formData.get("price") ? Number(formData.get("price")) : null,
       priceOnRequest: formData.get("priceOnRequest") === "on",
       currency: formData.get("currency") || "USD",
-      mainImage: formData.get("mainImage"),
+      mainImage: mainImage,
       published: formData.get("published") === "on",
       featured: formData.get("featured") === "on",
     }
@@ -182,8 +184,21 @@ export default function NewProductPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>Main Image URL</Label>
-              <Input name="mainImage" type="url" placeholder="https://..." />
+              <Label>Main Image</Label>
+              <CloudinaryUpload
+                value={mainImage}
+                onChange={setMainImage}
+                onRemove={() => setMainImage("")}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Or enter URL manually</Label>
+              <Input
+                type="url"
+                value={mainImage}
+                onChange={(e) => setMainImage(e.target.value)}
+                placeholder="https://..."
+              />
             </div>
           </CardContent>
         </Card>
