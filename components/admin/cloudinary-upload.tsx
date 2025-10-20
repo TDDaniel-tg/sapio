@@ -17,10 +17,12 @@ export function CloudinaryUpload({ value, onChange, onRemove }: CloudinaryUpload
     onChange(result.info.secure_url)
   }
 
+  const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "ml_default"
+
   return (
     <div className="space-y-4">
       <CldUploadWidget
-        uploadPreset="furniture_studio"
+        uploadPreset={uploadPreset}
         onUpload={onUpload}
       >
         {({ open }) => (

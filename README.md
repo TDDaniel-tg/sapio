@@ -38,17 +38,22 @@ NEXTAUTH_SECRET="your-secret-key-generate-with-openssl"
 
 # Cloudinary (для загрузки изображений в админке)
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your-cloud-name"
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET="ml_default"
 ```
 
 **⚙️ Настройка Cloudinary:**
 1. Зарегистрируйтесь на https://cloudinary.com (бесплатно)
-2. Перейдите: **Settings** → **Upload** → **Add upload preset**
-3. Создайте preset:
-   - Preset name: `furniture_studio`
-   - Signing Mode: `Unsigned`
-   - Folder: `furniture-studio` (опционально)
-4. Скопируйте **Cloud Name** из Dashboard
-5. Вставьте в `.env` как `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
+2. Скопируйте **Cloud Name** из Dashboard
+3. В `.env` добавьте:
+   ```
+   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="ваш-cloud-name"
+   NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET="ml_default"
+   ```
+4. **Или создайте свой preset:**
+   - Settings → Upload → Add upload preset
+   - Preset name: любое (например `furniture_studio`)
+   - Signing Mode: **Unsigned**
+   - Сохраните и укажите имя в `.env`
 
 Теперь в админке можно загружать фото кнопкой **Upload Image**!
 
