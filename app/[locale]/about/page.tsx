@@ -25,12 +25,12 @@ export default function AboutPage({ params }: AboutPageProps) {
         <div className="absolute inset-0 flex items-center justify-center text-white text-center">
           <div>
             <h1 className="text-5xl md:text-6xl font-bold mb-4">
-              {isRu ? "О нашей студии" : "About Our Studio"}
+              {isRu ? "О нашем производстве" : "About Our Production"}
             </h1>
             <p className="text-xl">
               {isRu 
-                ? "2 года создаём уникальную мебель для бизнеса"
-                : "2 years creating unique furniture for business"}
+                ? "2 года создаём надёжную мебель на каждый день"
+                : "2 years creating reliable furniture for everyday use"}
             </p>
           </div>
         </div>
@@ -46,18 +46,18 @@ export default function AboutPage({ params }: AboutPageProps) {
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
                 {isRu
-                  ? "Мы начали наш путь в 2023 году с простой идеи: создавать качественную мебель для бизнеса, которая будет радовать владельцев и их клиентов. Сегодня мы — команда профессионалов, которая реализовала более 50 проектов."
-                  : "We started our journey in 2023 with a simple idea: to create quality furniture for businesses that will delight owners and their clients. Today we are a team of professionals who have completed over 50 projects."}
+                  ? "Мы начали наш путь в 2023 году с простой идеи: создавать надёжную и качественную мебель на каждый день по справедливой цене. Мы не гонимся за премиум-статусом — мы делаем мебель, которая просто работает."
+                  : "We started our journey in 2023 with a simple idea: to create reliable and quality furniture for everyday use at a fair price. We don't chase premium status - we make furniture that simply works."}
               </p>
               <p>
                 {isRu
-                  ? "Наша миссия — делать мебель, которая не только выполняет свои функции, но и создаёт атмосферу, формирует образ бренда и остаётся актуальной долгие годы."
-                  : "Our mission is to make furniture that not only performs its functions, but also creates an atmosphere, shapes brand image and remains relevant for years to come."}
+                  ? "Наша философия — простота и надёжность. Мы отточили каждую деталь до совершенства: продуманная конструкция, легкая сборка, проверенные материалы. Никаких излишеств, только то, что нужно."
+                  : "Our philosophy is simplicity and reliability. We've perfected every detail: thoughtful design, easy assembly, proven materials. No frills, just what you need."}
               </p>
               <p>
                 {isRu
-                  ? "Мы гордимся своей работой и каждым проектом. От первой встречи до финальной сборки — мы вовлечены на 100%."
-                  : "We are proud of our work and every project. From first meeting to final assembly - we are 100% involved."}
+                  ? "Мы работаем только оптом (от 5 единиц), что позволяет нам предлагать честные цены для бизнеса. Более 50 компаний уже выбрали нашу мебель для своих кафе, офисов и магазинов."
+                  : "We work wholesale only (from 5 units), which allows us to offer fair prices for businesses. Over 50 companies have already chosen our furniture for their cafes, offices and stores."}
               </p>
             </div>
           </div>
@@ -79,12 +79,12 @@ export default function AboutPage({ params }: AboutPageProps) {
                 />
               </div>
               <h3 className="text-xl font-semibold mb-2">
-                {isRu ? "3D-моделирование" : "3D Modeling"}
+                {isRu ? "Простая сборка" : "Easy Assembly"}
               </h3>
               <p className="text-muted-foreground">
                 {isRu
-                  ? "Создаём реалистичные визуализации перед производством"
-                  : "Create realistic visualizations before production"}
+                  ? "Продуманная конструкция — легко собрать самостоятельно за 10-15 минут"
+                  : "Thoughtful design - easy to assemble yourself in 10-15 minutes"}
               </p>
             </div>
             <div className="text-center">
@@ -101,8 +101,8 @@ export default function AboutPage({ params }: AboutPageProps) {
               </h3>
               <p className="text-muted-foreground">
                 {isRu
-                  ? "Собственный цех с профессиональным оборудованием"
-                  : "Own workshop with professional equipment"}
+                  ? "Контроль качества на каждом этапе производства"
+                  : "Quality control at every stage of production"}
               </p>
             </div>
             <div className="text-center">
@@ -115,12 +115,12 @@ export default function AboutPage({ params }: AboutPageProps) {
                 />
               </div>
               <h3 className="text-xl font-semibold mb-2">
-                {isRu ? "Логистика" : "Logistics"}
+                {isRu ? "Оптовые продажи" : "Wholesale Sales"}
               </h3>
               <p className="text-muted-foreground">
                 {isRu
-                  ? "Доставка и сборка в любую точку СНГ и Европы"
-                  : "Delivery and assembly anywhere in CIS and Europe"}
+                  ? "Минимальный заказ от 5 единиц. Выгодные цены для бизнеса"
+                  : "Minimum order from 5 units. Great prices for business"}
               </p>
             </div>
           </div>
@@ -135,31 +135,31 @@ export default function AboutPage({ params }: AboutPageProps) {
             {[
               {
                 icon: Award,
-                title: isRu ? "Качество" : "Quality",
+                title: isRu ? "Надёжность" : "Reliability",
                 description: isRu
-                  ? "Используем только лучшие материалы и проверенные технологии"
-                  : "We use only the best materials and proven technologies",
+                  ? "Проверенные материалы и технологии. Мебель, которая служит годами"
+                  : "Proven materials and technologies. Furniture that lasts for years",
               },
               {
                 icon: Palette,
-                title: isRu ? "Инновации" : "Innovation",
+                title: isRu ? "Простота" : "Simplicity",
                 description: isRu
-                  ? "Следим за трендами и внедряем новые решения"
-                  : "We follow trends and implement new solutions",
+                  ? "Легкая сборка за 10-15 минут. Никаких сложных инструкций"
+                  : "Easy assembly in 10-15 minutes. No complicated instructions",
               },
               {
                 icon: Truck,
-                title: isRu ? "Сервис" : "Service",
+                title: isRu ? "Доступность" : "Affordability",
                 description: isRu
-                  ? "Полное сопровождение от заявки до доставки"
-                  : "Full support from request to delivery",
+                  ? "Честные оптовые цены без накруток. От 5 единиц"
+                  : "Fair wholesale prices without markup. From 5 units",
               },
               {
                 icon: Factory,
-                title: isRu ? "Честность" : "Honesty",
+                title: isRu ? "Качество" : "Quality",
                 description: isRu
-                  ? "Прозрачные цены и реальные сроки"
-                  : "Transparent prices and realistic timelines",
+                  ? "Контроль на каждом этапе производства. Собственный цех"
+                  : "Control at every production stage. Own workshop",
               },
             ].map((value, index) => {
               const Icon = value.icon

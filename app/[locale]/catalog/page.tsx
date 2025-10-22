@@ -64,7 +64,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-4">Catalog</h1>
           <p className="text-muted-foreground">
-            Discover our premium furniture collection
+            Reliable furniture for everyday use. Wholesale from 5 units.
           </p>
         </div>
 

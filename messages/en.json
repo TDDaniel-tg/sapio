@@ -9,10 +9,10 @@
     "orderNow": "Order Now"
   },
   "hero": {
-    "title": "Creating Premium Furniture for Your Business",
-    "subtitle": "From 3D design to delivery. Own production. CIS and Europe",
+    "title": "Reliable Furniture for Everyday Use",
+    "subtitle": "Easy to assemble, perfected to excellence. Wholesale from 5 units. Own production.",
     "viewCatalog": "View Catalog",
-    "getConsultation": "Get Consultation",
+    "getConsultation": "Request Wholesale Price",
     "scrollDown": "Scroll Down"
   },
   "stats": {
@@ -23,20 +23,20 @@
   "whyUs": {
     "title": "Why Choose Us",
     "fullCycle": {
-      "title": "Full Cycle",
-      "description": "From idea to installation in 14 days"
+      "title": "Easy Assembly",
+      "description": "Thoughtful design - easy to assemble yourself"
     },
     "design": {
-      "title": "Own 3D Design",
-      "description": "See the result before production"
+      "title": "Reliability",
+      "description": "Proven materials and production technologies"
     },
     "production": {
       "title": "Own Production",
-      "description": "Control quality at every stage"
+      "description": "Quality control at every stage"
     },
     "geography": {
-      "title": "Work in CIS and Europe",
-      "description": "Delivery to any country"
+      "title": "Wholesale Sales",
+      "description": "Minimum order from 5 units. Great prices for business"
     }
   },
   "categories": {
@@ -88,7 +88,7 @@
     }
   },
   "footer": {
-    "description": "Premium furniture for business. Own production, delivery worldwide.",
+    "description": "Reliable furniture for everyday use. Wholesale from 5 units. Own production.",
     "navigation": "Navigation",
     "contacts": "Contacts",
     "social": "Social Media",
@@ -97,11 +97,15 @@
   "product": {
     "viewDetails": "View Details",
     "priceOnRequest": "Price on Request",
-    "order": "Order",
+    "order": "Order Wholesale",
     "specifications": "Specifications",
     "materials": "Materials",
     "dimensions": "Dimensions",
-    "weight": "Weight"
+    "weight": "Weight",
+    "minOrder": "Minimum order: 5 pcs",
+    "wholesaleOnly": "Wholesale only",
+    "quantity": "Quantity (min. 5)",
+    "totalPrice": "Total Price"
   },
   "common": {
     "loading": "Loading...",

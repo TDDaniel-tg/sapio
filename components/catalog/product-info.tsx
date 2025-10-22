@@ -18,7 +18,7 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product, locale }: ProductInfoProps) {
   const { toast } = useToast()
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(5)
   const [isOrdering, setIsOrdering] = useState(false)
 
   const name = locale === "ru" ? product.nameRu : product.nameEn
@@ -94,11 +94,31 @@ export function ProductInfo({ product, locale }: ProductInfoProps) {
         )}
       </div>
 
+      {/* Wholesale Notice */}
+      <div className="p-4 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg">
+        <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">
+          {locale === "ru" ? "⚠️ Только оптовые продажи" : "⚠️ Wholesale only"}
+        </p>
+        <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
+          {locale === "ru" ? "Минимальный заказ: 5 единиц" : "Minimum order: 5 units"}
+        </p>
+      </div>
+
       {/* Price */}
-      <div className="text-3xl font-bold text-primary">
-        {product.priceOnRequest
-          ? locale === "ru" ? "Запросить стоимость" : "Price on Request"
-          : formatPrice(product.price || 0, product.currency)}
+      <div>
+        <div className="text-sm text-muted-foreground mb-2">
+          {locale === "ru" ? "Цена за единицу:" : "Price per unit:"}
+        </div>
+        <div className="text-3xl font-bold text-primary">
+          {product.priceOnRequest
+            ? locale === "ru" ? "Запросить стоимость" : "Price on Request"
+            : formatPrice(product.price || 0, product.currency)}
+        </div>
+        {!product.priceOnRequest && product.price && (
+          <div className="text-sm text-muted-foreground mt-2">
+            {locale === "ru" ? "Итого:" : "Total:"} <span className="text-lg font-semibold text-primary">{formatPrice((product.price || 0) * quantity, product.currency)}</span>
+          </div>
+        )}
       </div>
 
       {/* Order Form */}
@@ -126,36 +146,41 @@ export function ProductInfo({ product, locale }: ProductInfoProps) {
           <Textarea id="message" rows={3} />
         </div>
 
-        {!product.priceOnRequest && (
-          <div className="flex items-center gap-4">
-            <Label>{locale === "ru" ? "Количество:" : "Quantity:"}</Label>
-            <div className="flex items-center gap-2">
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              >
-                <Minus className="h-4 w-4" />
-              </Button>
-              <span className="w-12 text-center font-semibold">{quantity}</span>
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => setQuantity(quantity + 1)}
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
+        <div className="flex items-center gap-4">
+          <Label>{locale === "ru" ? "Количество (мин. 5):" : "Quantity (min. 5):"}</Label>
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={() => setQuantity(Math.max(5, quantity - 1))}
+              disabled={quantity <= 5}
+            >
+              <Minus className="h-4 w-4" />
+            </Button>
+            <span className="w-12 text-center font-semibold">{quantity}</span>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={() => setQuantity(quantity + 1)}
+            >
+              <Plus className="h-4 w-4" />
+            </Button>
           </div>
-        )}
+        </div>
 
         <Button type="submit" size="lg" className="w-full" disabled={isOrdering}>
           {isOrdering 
             ? "..." 
-            : locale === "ru" ? "Заказать товар" : "Order Product"}
+            : locale === "ru" ? "Заказать оптом" : "Order Wholesale"}
         </Button>
+        
+        <p className="text-xs text-center text-muted-foreground">
+          {locale === "ru" 
+            ? "Мы свяжемся с вами для обсуждения деталей оптовой поставки" 
+            : "We will contact you to discuss wholesale delivery details"}
+        </p>
       </form>
     </div>
   )

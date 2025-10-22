@@ -91,11 +91,11 @@ export default function AdminSettingsPage() {
               </div>
               <div className="space-y-2">
                 <Label>Title (RU)</Label>
-                <Input defaultValue="Создаём премиум мебель для вашего бизнеса" />
+                <Input defaultValue="Надёжная мебель на каждый день" />
               </div>
               <div className="space-y-2">
                 <Label>Title (EN)</Label>
-                <Input defaultValue="Creating Premium Furniture for Your Business" />
+                <Input defaultValue="Reliable Furniture for Everyday Use" />
               </div>
               <Button>Save Changes</Button>
             </CardContent>

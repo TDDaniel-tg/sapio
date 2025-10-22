@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "Furniture Studio - Premium Furniture for Business",
-  description: "Creating premium furniture for your business. From 3D design to delivery. Own production. CIS and Europe.",
+  title: "Furniture Studio - Reliable Furniture for Everyday Use",
+  description: "Reliable furniture for everyday use. Wholesale from 5 units. Easy to assemble, perfected to excellence. Own production.",
 };
 
 export default function RootLayout({

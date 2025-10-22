@@ -34,11 +34,9 @@ export function ProductCard({ product }: ProductCardProps) {
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-500"
             />
-            {product.featured && (
-              <Badge className="absolute top-4 right-4">
-                {locale === "ru" ? "Популярное" : "Popular"}
-              </Badge>
-            )}
+            <Badge className="absolute top-4 right-4 bg-blue-600">
+              {locale === "ru" ? "Опт от 5 шт" : "From 5 pcs"}
+            </Badge>
           </div>
         </Link>
 

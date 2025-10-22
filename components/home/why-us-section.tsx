@@ -2,7 +2,7 @@
 
 import { useTranslations } from "@/components/shared/translations-provider"
 import { motion } from "framer-motion"
-import { Zap, Palette, Factory, Globe2 } from "lucide-react"
+import { Wrench, Shield, Factory, ShoppingCart } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
 export function WhyUsSection() {
@@ -10,12 +10,12 @@ export function WhyUsSection() {
 
   const features = [
     {
-      icon: Zap,
+      icon: Wrench,
       title: t("fullCycle.title"),
       description: t("fullCycle.description"),
     },
     {
-      icon: Palette,
+      icon: Shield,
       title: t("design.title"),
       description: t("design.description"),
     },
@@ -25,7 +25,7 @@ export function WhyUsSection() {
       description: t("production.description"),
     },
     {
-      icon: Globe2,
+      icon: ShoppingCart,
       title: t("geography.title"),
       description: t("geography.description"),
     },
