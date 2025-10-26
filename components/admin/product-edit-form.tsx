@@ -96,6 +96,7 @@ export function ProductEditForm({ product }: ProductEditFormProps) {
                 <SelectItem value="CHAIRS">Chairs</SelectItem>
                 <SelectItem value="TABLES">Tables</SelectItem>
                 <SelectItem value="SHELVES">Shelves</SelectItem>
+                <SelectItem value="HOME_DECOR">Home Decor</SelectItem>
                 <SelectItem value="OTHER">Other</SelectItem>
               </SelectContent>
             </Select>

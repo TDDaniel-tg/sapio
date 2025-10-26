@@ -54,6 +54,7 @@ enum Category {
   CHAIRS
   TABLES
   SHELVES
+  HOME_DECOR
   OTHER
 }
 

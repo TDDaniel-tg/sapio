@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/shared/header";
 import { Footer } from "@/components/shared/footer";
 import { TranslationsProvider } from "@/components/shared/translations-provider";
+import { Preloader } from "@/components/shared/preloader";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -28,6 +29,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className="font-sans antialiased">
+        <Preloader />
         <TranslationsProvider locale={locale} messages={messages}>
           <ThemeProvider
             attribute="class"

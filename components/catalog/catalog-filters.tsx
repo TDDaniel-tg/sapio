@@ -35,6 +35,7 @@ export function CatalogFilters() {
     { value: "CHAIRS", label: locale === "ru" ? "Стулья" : "Chairs" },
     { value: "TABLES", label: locale === "ru" ? "Столы" : "Tables" },
     { value: "SHELVES", label: locale === "ru" ? "Стеллажи" : "Shelves" },
+    { value: "HOME_DECOR", label: locale === "ru" ? "Декор для дома" : "Home Decor" },
     { value: "OTHER", label: locale === "ru" ? "Другое" : "Other" },
   ]
 

@@ -10,9 +10,9 @@ import { VideoSection } from "@/components/home/video-section";
 import { TestimonialsPreview } from "@/components/home/testimonials-preview";
 import { ContactSection } from "@/components/home/contact-section";
 
-export default async function HomePage() {
+export default async function HomePage({ params }: { params: { locale: string } }) {
   // Fetch data from database
-  const [featuredProduct, portfolioProjects, testimonials] = await Promise.all([
+  const [featuredProduct, portfolioProjects, testimonials, settings] = await Promise.all([
     prisma.product.findFirst({
       where: { featured: true, published: true },
       orderBy: { createdAt: "desc" },
@@ -27,11 +27,21 @@ export default async function HomePage() {
       take: 3,
       orderBy: { createdAt: "desc" },
     }),
+    prisma.settings.findUnique({
+      where: { id: "singleton" },
+    }),
   ]);
 
   return (
     <>
-      <HeroSection />
+      <HeroSection 
+        videoUrl={settings?.heroVideoUrl}
+        titleRu={settings?.heroTitleRu}
+        titleEn={settings?.heroTitleEn}
+        subtitleRu={settings?.heroSubtitleRu}
+        subtitleEn={settings?.heroSubtitleEn}
+        locale={params.locale}
+      />
       <StatsBar />
       <WhyUsSection />
       {featuredProduct && <FeaturedProductSection product={featuredProduct} />}
