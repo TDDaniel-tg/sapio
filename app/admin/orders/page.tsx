@@ -1,27 +1,16 @@
 import { prisma } from "@/lib/prisma"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { formatDate } from "@/lib/utils"
+import { OrdersList } from "@/components/admin/orders-list"
 
 export default async function AdminOrdersPage() {
   const orders = await prisma.order.findMany({
     orderBy: { createdAt: "desc" },
-    take: 50,
   })
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "NEW":
-        return "bg-blue-500"
-      case "IN_PROGRESS":
-        return "bg-yellow-500"
-      case "COMPLETED":
-        return "bg-green-500"
-      case "CANCELLED":
-        return "bg-red-500"
-      default:
-        return "bg-gray-500"
-    }
+  const stats = {
+    total: orders.length,
+    new: orders.filter(o => o.status === "NEW").length,
+    inProgress: orders.filter(o => o.status === "IN_PROGRESS").length,
+    completed: orders.filter(o => o.status === "COMPLETED").length,
   }
 
   return (
@@ -31,44 +20,27 @@ export default async function AdminOrdersPage() {
         <p className="text-muted-foreground">Customer inquiries and orders</p>
       </div>
 
-      <div className="space-y-4">
-        {orders.map((order) => (
-          <Card key={order.id}>
-            <CardHeader>
-              <div className="flex items-start justify-between">
-                <div>
-                  <CardTitle className="text-lg">{order.name}</CardTitle>
-                  <div className="flex gap-4 mt-2 text-sm text-muted-foreground">
-                    <span>{order.phone}</span>
-                    {order.email && <span>{order.email}</span>}
-                    {order.company && <span>{order.company}</span>}
-                  </div>
-                </div>
-                <Badge className={getStatusColor(order.status)}>
-                  {order.status}
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Type:</span>
-                  <span>{order.type}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Date:</span>
-                  <span>{formatDate(order.createdAt, "ru")}</span>
-                </div>
-                {order.message && (
-                  <div className="pt-2 border-t">
-                    <p className="text-sm text-muted-foreground">{order.message}</p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+      {/* Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="bg-card border rounded-lg p-4">
+          <div className="text-2xl font-bold">{stats.total}</div>
+          <div className="text-sm text-muted-foreground">Total Orders</div>
+        </div>
+        <div className="bg-card border rounded-lg p-4">
+          <div className="text-2xl font-bold text-blue-500">{stats.new}</div>
+          <div className="text-sm text-muted-foreground">New</div>
+        </div>
+        <div className="bg-card border rounded-lg p-4">
+          <div className="text-2xl font-bold text-yellow-500">{stats.inProgress}</div>
+          <div className="text-sm text-muted-foreground">In Progress</div>
+        </div>
+        <div className="bg-card border rounded-lg p-4">
+          <div className="text-2xl font-bold text-green-500">{stats.completed}</div>
+          <div className="text-sm text-muted-foreground">Completed</div>
+        </div>
       </div>
+
+      <OrdersList initialOrders={orders} />
     </div>
   )
 }

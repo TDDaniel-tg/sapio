@@ -22,7 +22,8 @@ export function ContactForm({ locale }: ContactFormProps) {
     e.preventDefault()
     setIsLoading(true)
 
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget // Сохраняем ссылку на форму
+    const formData = new FormData(form)
     const data = {
       name: formData.get("name"),
       phone: formData.get("phone"),
@@ -39,16 +40,18 @@ export function ContactForm({ locale }: ContactFormProps) {
         body: JSON.stringify(data),
       })
 
-      if (res.ok) {
+      const responseData = await res.json()
+
+      if (res.ok && responseData.success) {
         toast({
           title: isRu ? "Заявка отправлена!" : "Request submitted!",
           description: isRu
             ? "Мы свяжемся с вами в ближайшее время"
             : "We'll contact you soon",
         })
-        e.currentTarget.reset()
+        form.reset() // Используем сохраненную ссылку
       } else {
-        throw new Error("Failed to submit")
+        throw new Error(responseData.error || "Failed to submit")
       }
     } catch (error) {
       toast({

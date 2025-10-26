@@ -18,16 +18,42 @@ export function ContactSection() {
     e.preventDefault()
     setIsLoading(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    const form = e.currentTarget // Сохраняем ссылку на форму
+    const formData = new FormData(form)
+    const data = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+      type: "CONSULTATION",
+    }
 
-    toast({
-      title: t("form.submit"),
-      description: "We'll get back to you soon!",
-    })
+    try {
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
 
-    setIsLoading(false)
-    e.currentTarget.reset()
+      const responseData = await res.json()
+
+      if (res.ok && responseData.success) {
+        toast({
+          title: t("form.submit"),
+          description: "We'll get back to you soon!",
+        })
+        form.reset() // Используем сохраненную ссылку
+      } else {
+        throw new Error(responseData.error || "Failed to submit")
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to submit. Please try again later.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (

@@ -28,17 +28,49 @@ export function ProductInfo({ product, locale }: ProductInfoProps) {
     e.preventDefault()
     setIsOrdering(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    const form = e.currentTarget // Сохраняем ссылку на форму
+    const formData = new FormData(form)
+    const data = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+      type: "PRODUCT",
+      productId: product.id,
+    }
 
-    toast({
-      title: locale === "ru" ? "Заказ отправлен!" : "Order submitted!",
-      description: locale === "ru" 
-        ? "Мы свяжемся с вами в ближайшее время" 
-        : "We'll contact you soon",
-    })
+    try {
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
 
-    setIsOrdering(false)
+      const responseData = await res.json()
+
+      if (res.ok && responseData.success) {
+        toast({
+          title: locale === "ru" ? "Заказ отправлен!" : "Order submitted!",
+          description: locale === "ru" 
+            ? "Мы свяжемся с вами в ближайшее время" 
+            : "We'll contact you soon",
+        })
+        form.reset() // Используем сохраненную ссылку
+        setQuantity(5)
+      } else {
+        throw new Error(responseData.error || "Failed to submit")
+      }
+    } catch (error) {
+      toast({
+        title: locale === "ru" ? "Ошибка" : "Error",
+        description: locale === "ru"
+          ? "Не удалось отправить заказ. Попробуйте позже."
+          : "Failed to submit order. Please try again later.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsOrdering(false)
+    }
   }
 
   return (
@@ -126,24 +158,30 @@ export function ProductInfo({ product, locale }: ProductInfoProps) {
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="name">{locale === "ru" ? "Имя" : "Name"} *</Label>
-            <Input id="name" required />
+            <Input id="name" name="name" required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="phone">{locale === "ru" ? "Телефон" : "Phone"} *</Label>
-            <Input id="phone" type="tel" required />
+            <Input id="phone" name="phone" type="tel" required />
           </div>
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="email">{locale === "ru" ? "Email" : "Email"}</Label>
-          <Input id="email" type="email" />
+          <Input id="email" name="email" type="email" />
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="message">
-            {locale === "ru" ? "Комментарий к заказу" : "Order comment"}
+            {locale === "ru" ? `Комментарий к заказу (количество: ${quantity} шт)` : `Order comment (quantity: ${quantity} pcs)`}
           </Label>
-          <Textarea id="message" rows={3} />
+          <Textarea 
+            id="message" 
+            name="message"
+            rows={3}
+            key={quantity}
+            defaultValue={`${locale === "ru" ? "Хочу заказать" : "I want to order"} ${quantity} ${locale === "ru" ? "шт" : "pcs"} "${name}"`}
+          />
         </div>
 
         <div className="flex items-center gap-4">
