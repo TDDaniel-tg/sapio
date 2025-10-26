@@ -3,11 +3,8 @@ import { ThemeProvider } from "@/components/shared/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/shared/header";
 import { Footer } from "@/components/shared/footer";
-import { Inter } from "next/font/google";
 import { TranslationsProvider } from "@/components/shared/translations-provider";
 import "../globals.css";
-
-const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export function generateStaticParams() {
   return [{ locale: "ru" }, { locale: "en" }];
@@ -30,7 +27,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className="font-sans antialiased">
         <TranslationsProvider locale={locale} messages={messages}>
           <ThemeProvider
             attribute="class"

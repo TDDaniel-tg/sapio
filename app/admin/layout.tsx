@@ -1,11 +1,8 @@
-import { Inter } from "next/font/google"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Home, Package, FileText, ShoppingCart, Settings } from "lucide-react"
 import { Toaster } from "@/components/ui/toaster"
 import "../globals.css"
-
-const inter = Inter({ subsets: ["latin"] })
 
 export default function AdminLayout({
   children,
@@ -14,7 +11,7 @@ export default function AdminLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="font-sans antialiased">
         <div className="flex h-screen">
           {/* Sidebar */}
           <aside className="w-64 bg-card border-r flex-shrink-0">
