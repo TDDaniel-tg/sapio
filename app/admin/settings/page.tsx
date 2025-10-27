@@ -66,6 +66,10 @@ export default function AdminSettingsPage() {
 
       if (res.ok && !responseData.error) {
         toast({ title: "Settings saved successfully!" })
+        
+        // Revalidate homepage to show changes immediately
+        fetch("/api/revalidate?path=/ru", { method: "GET" }).catch(() => {})
+        fetch("/api/revalidate?path=/en", { method: "GET" }).catch(() => {})
       } else {
         console.error("Save failed:", responseData)
         toast({ 

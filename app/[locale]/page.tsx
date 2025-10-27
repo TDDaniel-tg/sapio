@@ -10,6 +10,10 @@ import { VideoSection } from "@/components/home/video-section";
 import { TestimonialsPreview } from "@/components/home/testimonials-preview";
 import { ContactSection } from "@/components/home/contact-section";
 
+// Enable dynamic rendering to see updates immediately
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default async function HomePage({ params }: { params: { locale: string } }) {
   // Fetch data from database
   const [featuredProduct, portfolioProjects, testimonials, settings] = await Promise.all([

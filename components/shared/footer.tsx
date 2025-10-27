@@ -29,9 +29,19 @@ export function Footer({ locale }: FooterProps) {
   useEffect(() => {
     // Загружаем настройки с сервера
     fetch("/api/settings")
-      .then(res => res.json())
-      .then(data => setSettings(data))
-      .catch(() => setSettings(null))
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        throw new Error("Failed to fetch")
+      })
+      .then(data => {
+        setSettings(data)
+      })
+      .catch((err) => {
+        console.error("Failed to load settings:", err)
+        setSettings(null)
+      })
   }, [])
 
   return (
