@@ -29,11 +29,33 @@ export async function GET() {
   }
 }
 
-// PUT (update) settings
-export async function PUT(request: NextRequest) {
+// POST (update) settings - works for both GET and UPDATE based on request body
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
+    console.log("Processing settings with:", body);
+    
+    // If only checking, return existing settings
+    if (body._action === "get") {
+      let settings = await prisma.settings.findUnique({
+        where: { id: "singleton" },
+      });
+
+      if (!settings) {
+        settings = await prisma.settings.create({
+          data: {
+            id: "singleton",
+            email: "info@furniture-studio.com",
+            phone: "+7 (700) 123-45-67",
+          },
+        });
+      }
+
+      return NextResponse.json(settings);
+    }
+    
+    // Otherwise update settings
     console.log("Updating settings with:", body);
 
     // Build update object - only include defined fields
