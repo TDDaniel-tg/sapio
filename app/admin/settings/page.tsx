@@ -48,22 +48,39 @@ export default function AdminSettingsPage() {
   const handleSave = async (section: string) => {
     setIsLoading(true)
     try {
+      const payload = {
+        ...settings,
+        heroVideoUrl,
+      }
+      
+      console.log("Saving settings:", payload)
+      
       const res = await fetch("/api/settings", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...settings,
-          heroVideoUrl,
-        }),
+        body: JSON.stringify(payload),
       })
 
-      if (res.ok) {
+      const responseData = await res.json()
+      console.log("Save response:", res.status, responseData)
+
+      if (res.ok && !responseData.error) {
         toast({ title: "Settings saved successfully!" })
       } else {
-        toast({ title: "Error", description: "Failed to save settings", variant: "destructive" })
+        console.error("Save failed:", responseData)
+        toast({ 
+          title: "Error", 
+          description: responseData.error || "Failed to save settings", 
+          variant: "destructive" 
+        })
       }
     } catch (error) {
-      toast({ title: "Error", description: "Something went wrong", variant: "destructive" })
+      console.error("Save error:", error)
+      toast({ 
+        title: "Error", 
+        description: error instanceof Error ? error.message : "Something went wrong", 
+        variant: "destructive" 
+      })
     } finally {
       setIsLoading(false)
     }
