@@ -1,36 +1,38 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react"
-import { prisma } from "@/lib/prisma"
+import { useTranslations } from "./translations-provider"
 
 interface FooterProps {
   locale: string
 }
 
-async function getSettings() {
-  try {
-    const settings = await prisma.settings.findUnique({
-      where: { id: "singleton" },
-    })
-    return settings
-  } catch {
-    return null
-  }
+interface Settings {
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  whatsapp?: string | null
+  telegram?: string | null
+  instagram?: string | null
+  facebook?: string | null
+  youtube?: string | null
 }
 
-export async function Footer({ locale }: FooterProps) {
-  const settings = await getSettings()
+export function Footer({ locale }: FooterProps) {
+  const t = useTranslations("footer")
+  const tNav = useTranslations("nav")
+  const [settings, setSettings] = useState<Settings | null>(null)
   const currentYear = new Date().getFullYear()
-  
-  // Translations
-  const messages = (await import(`../../messages/${locale}.json`)).default
-  const t = (key: string) => {
-    const keys = key.split('.')
-    let value: any = messages
-    for (const k of keys) {
-      value = value?.[k]
-    }
-    return value || key
-  }
+
+  useEffect(() => {
+    // Загружаем настройки с сервера
+    fetch("/api/settings")
+      .then(res => res.json())
+      .then(data => setSettings(data))
+      .catch(() => setSettings(null))
+  }, [])
 
   return (
     <footer className="bg-muted/50 border-t">
@@ -45,20 +47,20 @@ export async function Footer({ locale }: FooterProps) {
               <span className="font-bold text-lg">Furniture Studio</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              {t("footer.description")}
+              {t("description")}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h3 className="font-semibold mb-4">{t("footer.navigation")}</h3>
+            <h3 className="font-semibold mb-4">{t("navigation")}</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href={`/${locale}`}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                  {t("nav.home")}
+                  {tNav("home")}
                 </Link>
               </li>
               <li>
@@ -66,7 +68,7 @@ export async function Footer({ locale }: FooterProps) {
                   href={`/${locale}/catalog`}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                  {t("nav.catalog")}
+                  {tNav("catalog")}
                 </Link>
               </li>
               <li>
@@ -74,7 +76,7 @@ export async function Footer({ locale }: FooterProps) {
                   href={`/${locale}/portfolio`}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                  {t("nav.portfolio")}
+                  {tNav("portfolio")}
                 </Link>
               </li>
               <li>
@@ -82,7 +84,7 @@ export async function Footer({ locale }: FooterProps) {
                   href={`/${locale}/about`}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                  {t("nav.about")}
+                  {tNav("about")}
                 </Link>
               </li>
               <li>
@@ -90,7 +92,7 @@ export async function Footer({ locale }: FooterProps) {
                   href={`/${locale}/contact`}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                  {t("nav.contact")}
+                  {tNav("contact")}
                 </Link>
               </li>
             </ul>
@@ -98,7 +100,7 @@ export async function Footer({ locale }: FooterProps) {
 
           {/* Contacts */}
           <div>
-            <h3 className="font-semibold mb-4">{t("footer.contacts")}</h3>
+            <h3 className="font-semibold mb-4">{t("contacts")}</h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
@@ -119,7 +121,7 @@ export async function Footer({ locale }: FooterProps) {
 
           {/* Social */}
           <div>
-            <h3 className="font-semibold mb-4">{t("footer.social")}</h3>
+            <h3 className="font-semibold mb-4">{t("social")}</h3>
             <div className="flex space-x-3">
               {settings?.instagram && (
                 <a
@@ -156,7 +158,7 @@ export async function Footer({ locale }: FooterProps) {
         </div>
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>© {currentYear} Furniture Studio. {t("footer.rights")}.</p>
+          <p>© {currentYear} Furniture Studio. {t("rights")}.</p>
         </div>
       </div>
     </footer>

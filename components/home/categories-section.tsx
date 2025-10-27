@@ -33,11 +33,6 @@ export function CategoriesSection() {
       image: "/images/category-shelves.jpg",
     },
     {
-      slug: "home-decor",
-      title: t("homeDecor"),
-      image: "/images/category-home-decor.jpg",
-    },
-    {
       slug: "other",
       title: t("other"),
       image: "/images/category-other.jpg",
